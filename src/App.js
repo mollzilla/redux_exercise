@@ -1,6 +1,6 @@
 import { React, useState } from "react";
-import Layout from "./components/Layout";
-import Cart from "./components/Cart";
+import NavBar from "./components/NavBar";
+import CartContainer from "./components/CartContainer";
 import { puppies } from "./puppies.js";
 
 
@@ -12,13 +12,13 @@ function App() {
   console.log(puppies)
   return (
     <div className="App">
-      <Layout />
+      <NavBar />
       <header className="App-header">
         
         <h1>Adopt a puppy or two</h1>
       </header>
 
-      <Cart puppies={selectedPuppies} />
+      <CartContainer cart={selectedPuppies} />
     </div>
   );
 }
