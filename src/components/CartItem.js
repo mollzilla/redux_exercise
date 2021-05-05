@@ -8,30 +8,39 @@ import { connect } from "react-redux";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const CartItem = ({ id, name, img, amount, medicalCosts, remove, increase, decrease }) => {
+const CartItem = ({
+  id,
+  name,
+  img,
+  amount,
+  medicalCosts,
+  remove,
+  increase,
+  decrease,
+  toggle
+}) => {
+  const decreaseCase = (amount, toggle) => {
+    if (amount === 1) remove();
+    else toggle(toggle);
+  };
 
   return (
     <ListItem button>
       <ListItemText primary={name} />
-      <div style={{width: "150px", margin: "0 25px"}}>
-      <p>Medical costs for this beauty are ${medicalCosts}</p>
-
+      <div style={{ width: "150px", margin: "0 25px" }}>
+        <p>Medical costs for this beauty are ${medicalCosts}</p>
       </div>
       <img src={img} alt="puppy look!" />
-      <div style={{margin: "25px"}}>
-      <h3>{amount} puppy units</h3>
-      <ExpandLessIcon fontSize="large" onClick={() => increase()} />
+      <div style={{ margin: "25px" }}>
+        <h3>{amount} puppy units</h3>
+        <ExpandLessIcon fontSize="large" onClick={() => toggle("inc")} />
 
-      <ExpandMoreIcon fontSize="large" onClick={() => decrease()} />
-      <br/>
-      <Button 
-      onClick={() => remove()}
-      variant="contained" 
-      color="primary">
-        Remove
-      </Button>
+        <ExpandMoreIcon fontSize="large" onClick={() => toggle("dec")} />
+        <br />
+        <Button onClick={() => remove()} variant="contained" color="primary">
+          Remove
+        </Button>
       </div>
-
     </ListItem>
   );
 };
@@ -43,8 +52,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     // we must have type, but we can add other values. Common practice is calling it payload.
     remove: () => dispatch({ type: ACTIONS.REMOVE, payload: { id } }),
-    increase: () => dispatch({ type: ACTIONS.INCREASE, payload: { id, amount } }),
-    decrease: () => dispatch({ type: ACTIONS.DECREASE, payload: { id, amount } })
+    increase: () =>
+      dispatch({ type: ACTIONS.INCREASE, payload: { id, amount } }),
+    decrease: () =>
+      dispatch({ type: ACTIONS.DECREASE, payload: { id, amount } }),
+    toggle: (toggle) =>
+      dispatch({ type: ACTIONS.TOGGLE_AMOUNT, payload: { id, toggle } }),
   };
 };
 

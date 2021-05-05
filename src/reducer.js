@@ -1,19 +1,16 @@
+import { Satellite } from "@material-ui/icons";
 import { ACTIONS } from "./actions.js";
 
 function reducer(state, action) {
   let tempCart = [];
   switch (action.type) {
     case ACTIONS.DECREASE:
-      if (action.payload.amount === 1) {
-        tempCart = state.cart.filter((item) => item.id !== action.payload.id);
-      } else {
-        tempCart = state.cart.map((item) => {
-          if (item.id === action.payload.id)
-            item = { ...item, amount: item.amount - 1 };
+      tempCart = state.cart.map((item) => {
+        if (item.id === action.payload.id)
+          item = { ...item, amount: item.amount - 1 };
 
-          return item;
-        });
-      }
+        return item;
+      });
 
       return { ...state, cart: tempCart };
 
@@ -34,16 +31,30 @@ function reducer(state, action) {
       };
     case ACTIONS.CLEAR_CART:
       return { ...state, cart: [] };
-    // case ACTIONS.TOGGLE_AMOUNT:
-    //   return { ...state };
+    case ACTIONS.TOGGLE_AMOUNT:
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (item.id === action.payload.id) {
+            if (action.payload.toggle === "inc") {
+              item = { ...item, amount: item.amount + 1 };
+            } else if (action.payload.toggle === "dec") {
+              item = { ...item, amount: item.amount - 1 };
+            }
+          }
+          return item;
+        }),
+      };
+
     case ACTIONS.GET_TOTAL:
       console.log("get total");
 
       let { total, amount } = state.cart.reduce(
         (cartTotal, cartItem) => {
-          let { price, amount } = cartItem;
+          let { medicalCosts, amount } = cartItem;
+          console.log(medicalCosts, amount);
 
-          const itemTotal = price * amount;
+          const itemTotal = medicalCosts * amount;
 
           cartTotal.total += itemTotal;
           cartTotal.amount += amount;

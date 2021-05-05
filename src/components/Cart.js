@@ -25,7 +25,7 @@ const Cart = ({ puppies, total, amount, dispatch }) => {
         ))}
       </List>
       <h2 style={{ textAlign: "center", margin: "30px auto" }}>
-        Total medical expenses = {total}{" "}
+        Total medical expenses = ${total}{" "}
       </h2>
       <Button
         onClick={() => dispatch({ type: ACTIONS.CLEAR_CART })}
