@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBar = ({ amount }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -108,13 +108,13 @@ const NavBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Welcome to the Material UI shopping cart
+            Welcome to the Material UI shopping cart (Actually, it's an adopting litter :) )
           </Typography>
           
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={amount} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -133,5 +133,9 @@ const NavBar = () => {
   );
 }
 
-const mapState = state => {console.log(state);}
-export default connect(mapState)(NavBar);
+const mapStateToProps = state => { // must return a plain object
+
+  return { amount: state.amount }
+};
+
+export default connect(mapStateToProps)(NavBar);

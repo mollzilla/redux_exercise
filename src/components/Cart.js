@@ -4,11 +4,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+import { ACTIONS } from "../actions.js";
+
 
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const Cart = ({ puppies }) => {
+const Cart = ({ puppies, total, dispatch }) => {
   return (
     <>
       <List style={{ width: "60%", margin: "0 auto" }}>
@@ -35,8 +37,16 @@ const Cart = ({ puppies }) => {
           </>
         ))}
       </List>
-      <Button variant="contained" color="primary" style={{display: "block", margin: "0 auto"}}>
-        Empty Cart
+      <h2 style={{ textAlign: "center", margin: "30px auto" }}>
+        Total medical expenses = {total}{" "}
+      </h2>
+      <Button
+        onClick={() => dispatch({ type: ACTIONS.CLEAR_CART})}
+        variant="contained"
+        color="primary"
+        style={{ display: "block", margin: "0 auto" }}
+      >
+        Empty Litter
       </Button>
     </>
   );

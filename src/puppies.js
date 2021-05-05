@@ -36,7 +36,7 @@ export const puppies = [
     age: 12,
     size: 3,
     activity: 2,
-    img: "https://place-puppy.com/202x202",
+    img: "https://place-puppy.com/203x203",
     count: 0
   },
 ]

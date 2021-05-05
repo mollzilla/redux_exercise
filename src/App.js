@@ -9,17 +9,16 @@ import reducer from "./reducer";
 import { Provider } from "react-redux";
 
 const initialStore = {
-  cart: puppies,
-  total: 0,
-  amount: 5
+  cart: [...puppies],
+  total: 3000,
+  amount: 3
 };
 
 
 const store = createStore(reducer, initialStore);
-function App() {
-  const [selectedPuppies, setSelectedPuppies] = useState([puppies[0], puppies[1]]);
 
-  console.log(puppies)
+function App() {
+
   return (
     <Provider store={store}>
       <NavBar />
@@ -28,7 +27,7 @@ function App() {
         <h1>Adopt a puppy or two</h1>
       </header>
 
-      <CartContainer cart={selectedPuppies} />
+      <CartContainer />
     </Provider>
   );
 }
