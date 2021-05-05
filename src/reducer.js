@@ -1,7 +1,8 @@
 import { Satellite } from "@material-ui/icons";
 import { ACTIONS } from "./actions.js";
 
-function reducer(state, action) {
+
+function reducer(state = [], action) {
   let tempCart = [];
   switch (action.type) {
     case ACTIONS.REMOVE:
