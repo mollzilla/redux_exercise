@@ -26,30 +26,4 @@ const CartItem = ({ name, img }) => {
   );
 };
 
-const Cart = ({ puppies, total, dispatch }) => {
-  return (
-    <>
-      <List style={{ width: "60%", margin: "0 auto" }}>
-        {puppies.map((puppy, i) => (
-          <>
-            <CartItem {...puppy} />
-            {i < puppies.length && <Divider />}
-          </>
-        ))}
-      </List>
-      <h2 style={{ textAlign: "center", margin: "30px auto" }}>
-        Total medical expenses = {total}{" "}
-      </h2>
-      <Button
-        onClick={() => dispatch({ type: ACTIONS.CLEAR_CART })}
-        variant="contained"
-        color="primary"
-        style={{ display: "block", margin: "0 auto" }}
-      >
-        Empty Litter
-      </Button>
-    </>
-  );
-};
-
-export default Cart;
+export default connect()(CartItem);

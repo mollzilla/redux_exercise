@@ -4,12 +4,15 @@ function reducer(state, action) {
   console.log({ state, action });
 
   switch (action.type) {
-    // case ACTIONS.DECREASE:
-    //   return { ...state, count: state.count - 1 };
-    // case ACTIONS.INCREASE:
-    //   return { ...state, count: state.count + 1 };
-    // case ACTIONS.REMOVE:
-    //   return { ...state };
+    case ACTIONS.DECREASE:
+      console.log("decreased");
+      return { ...state, count: state.count - 1 };
+    case ACTIONS.INCREASE:
+      console.log("increased")
+      return { ...state, count: state.count + 1 };
+    case ACTIONS.REMOVE:
+      console.log("removed")
+      return { ...state };
     case ACTIONS.CLEAR_CART:
       return { ...state, cart: [] };
     // case ACTIONS.GET_AMOUNT:
