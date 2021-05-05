@@ -8,11 +8,15 @@ import { connect } from "react-redux";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const CartItem = ({ id, name, img, amount, remove, increase, decrease }) => {
+const CartItem = ({ id, name, img, amount, medicalCosts, remove, increase, decrease }) => {
 
   return (
     <ListItem button>
       <ListItemText primary={name} />
+      <div style={{width: "150px", margin: "0 25px"}}>
+      <p>Medical costs for this beauty are ${medicalCosts}</p>
+
+      </div>
       <img src={img} alt="puppy look!" />
       <div style={{margin: "25px"}}>
       <h3>{amount} puppy units</h3>

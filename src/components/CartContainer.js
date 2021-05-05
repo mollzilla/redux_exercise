@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { actions } from "../actions.js";
 
 
-function CartContainer({ cart = [], total, dispatch }) {
+function CartContainer({ cart = [], total, amount, dispatch }) {
 
   if(cart.length===0)
     return(
@@ -14,7 +14,7 @@ function CartContainer({ cart = [], total, dispatch }) {
 
   return (
     <div>
-      <Cart puppies={cart} total={total} dispatch={dispatch} />
+      <Cart puppies={cart} total={total} dispatch={dispatch} amount={amount} />
     </div>
   );
 }

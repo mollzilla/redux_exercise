@@ -1,8 +1,6 @@
 import { ACTIONS } from "./actions.js";
 
 function reducer(state, action) {
-  console.log({ state, action });
-
   let tempCart = [];
   switch (action.type) {
     case ACTIONS.DECREASE:
@@ -20,8 +18,6 @@ function reducer(state, action) {
       return { ...state, cart: tempCart };
 
     case ACTIONS.INCREASE:
-      console.log("increased");
-
       tempCart = state.cart.map((item) => {
         if (item.id === action.payload.id)
           item = { ...item, amount: item.amount + 1 };
@@ -31,7 +27,6 @@ function reducer(state, action) {
 
       return { ...state, cart: tempCart };
     case ACTIONS.REMOVE:
-      console.log("removed");
       // can use filter because it returns a new array
       return {
         ...state,
@@ -39,10 +34,26 @@ function reducer(state, action) {
       };
     case ACTIONS.CLEAR_CART:
       return { ...state, cart: [] };
-    // case ACTIONS.GET_AMOUNT:
+    // case ACTIONS.TOGGLE_AMOUNT:
     //   return { ...state };
-    // case ACTIONS.GET_TOTAL:
-    //   return { ...state };
+    case ACTIONS.GET_TOTAL:
+      console.log("get total");
+
+      let { total, amount } = state.cart.reduce(
+        (cartTotal, cartItem) => {
+          let { price, amount } = cartItem;
+
+          const itemTotal = price * amount;
+
+          cartTotal.total += itemTotal;
+          cartTotal.amount += amount;
+
+          return cartTotal;
+        },
+        { total: 0, amount: 0 }
+      );
+      total = parseFloat(total.toFixed(2));
+      return { ...state, total, amount };
     default:
       return state;
   }

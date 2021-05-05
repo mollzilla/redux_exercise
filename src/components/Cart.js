@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,12 @@ import { connect } from "react-redux";
 
 
 
-const Cart = ({ puppies, total, dispatch }) => {
+const Cart = ({ puppies, total, amount, dispatch }) => {
+
+  useEffect(() => {
+    dispatch({type: ACTIONS.GET_TOTAL})
+  });
+
   return (
     <>
       <List style={{ width: "60%", margin: "0 auto" }}>
