@@ -19,9 +19,9 @@ const CartItem = ({
   decrease,
   toggle
 }) => {
-  const decreaseCase = (amount, toggle) => {
+  const modifyItemsCases = (amount, items) => {
     if (amount === 1) remove();
-    else toggle(toggle);
+    else toggle(items);
   };
 
   return (
@@ -33,9 +33,9 @@ const CartItem = ({
       <img src={img} alt="puppy look!" />
       <div style={{ margin: "25px" }}>
         <h3>{amount} puppy units</h3>
-        <ExpandLessIcon fontSize="large" onClick={() => toggle("inc")} />
+        <ExpandLessIcon fontSize="large" onClick={() => modifyItemsCases(amount, "inc")} />
 
-        <ExpandMoreIcon fontSize="large" onClick={() => toggle("dec")} />
+        <ExpandMoreIcon fontSize="large" onClick={() => modifyItemsCases(amount, "dec")} />
         <br />
         <Button onClick={() => remove()} variant="contained" color="primary">
           Remove

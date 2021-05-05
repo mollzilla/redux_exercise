@@ -4,25 +4,6 @@ import { ACTIONS } from "./actions.js";
 function reducer(state, action) {
   let tempCart = [];
   switch (action.type) {
-    case ACTIONS.DECREASE:
-      tempCart = state.cart.map((item) => {
-        if (item.id === action.payload.id)
-          item = { ...item, amount: item.amount - 1 };
-
-        return item;
-      });
-
-      return { ...state, cart: tempCart };
-
-    case ACTIONS.INCREASE:
-      tempCart = state.cart.map((item) => {
-        if (item.id === action.payload.id)
-          item = { ...item, amount: item.amount + 1 };
-
-        return item;
-      });
-
-      return { ...state, cart: tempCart };
     case ACTIONS.REMOVE:
       // can use filter because it returns a new array
       return {
@@ -30,7 +11,7 @@ function reducer(state, action) {
         cart: state.cart.filter((item) => item.id !== action.payload.id),
       };
     case ACTIONS.CLEAR_CART:
-      return { ...state, cart: [] };
+      return { ...state, cart: [], amount: 0 };
     case ACTIONS.TOGGLE_AMOUNT:
       return {
         ...state,
